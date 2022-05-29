@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="Putkis">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 		<link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css"> 
+ 		<title>Book Collection</title>
+	</head>
+	<body>
+		<nav style="padding:10px 20px">
+			<a href="{% url "book_collection" %}">Book Collection</a>
+			{% if user.is_staff %}
+				<a href="{% url "admin:index" %}">Admin Panel </a>
+			{% endif %}
+		</nav>
+
+		{% block content %}
+			<p> Emptiness</p>
+		{% endblock %}
+	</body>
+</html>

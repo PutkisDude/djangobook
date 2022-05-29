@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% if user.is_authenticated %}
+	<a href="{{object.get_absolute_url}}/update"><button>Edit</button></a>
+	{% endif %}
+	<ul>
+		<li>ID: #{{ object.id }} </li>
+		<li>Name: {{ object.name }}</li>
+		<li>Author: {{ object.author }}</li>
+		<li>Release year: {{ object.year }}</li>
+	</ul>
+{% endblock %}

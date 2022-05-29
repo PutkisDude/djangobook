@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	{% if book_moderator %}
+		<a href="{% url "new_book" %}"><button>Add a book</button></a>
+	{% endif %}
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Title</th>
+				{% if book_moderator %}
+					<th>Edit</th>
+					<th>Delete</th>
+				{% endif %}
+			</tr>
+		</thead>
+{% for book in object_list %}
+		<tr>
+			<td><a href="{{ book.get_absolute_url }}"> {{ book.name }}</a></td>
+
+				{% if book_moderator %}
+					<td>
+						<a href="{{ book.get_absolute_url}}/update">
+							<img src="/static/icons/pencil-square.svg" alt="Edit" width="25" height="32">
+						</a>
+					</td>
+					<td>
+						<a href="{{ book.get_absolute_url}}/delete">
+							<img src="/static/icons/trash3-fill.svg" alt="Delete" width="25" height="25">
+						</a>
+					</td>
+				{% endif %}		
+		</tr>
+{% empty %}
+	<p>No books in database</p>
+{% endfor %}
+	</table>
+
+
+{% if page_obj.paginator.num_pages > 1 %}
+	<br />
+	<p>Page {{ page_obj.number }} of {{page_obj.paginator.num_pages}}</p>
+	{% if page_obj.has_previous %}
+		<a href="?page=1"> &laquo; First </a> -
+		<a href="?page={{ page_obj.previous_page_number }}"> Previous </a> -
+	{% else %}
+		<span> &laquo; First - Previous -</span>
+	{% endif %}
+	{% if page_obj.has_next %}
+		<a href="?page={{ page_obj.next_page_number }}"> Next </a> -
+		<a href="?page={{ page_obj.paginator.num_pages }}"> Last &raquo;</a>
+	{% else %}
+		<span> Next - Last &raquo</span>
+	{% endif %}
+{% endif %}
+
+{% endblock %}
