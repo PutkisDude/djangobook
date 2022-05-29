@@ -2,7 +2,7 @@
 
 {% block content %}
 
-	{% if book_moderator %}
+	{% if book_moderator or user.is_authenticated %}
 		<a href="{% url "new_book" %}"><button>Add a book</button></a>
 	{% endif %}
 
@@ -10,7 +10,7 @@
 		<thead>
 			<tr>
 				<th>Title</th>
-				{% if book_moderator %}
+				{% if book_moderator or user.is_authenticated %}
 					<th>Edit</th>
 					<th>Delete</th>
 				{% endif %}
@@ -20,7 +20,7 @@
 		<tr>
 			<td><a href="{{ book.get_absolute_url }}"> {{ book.name }}</a></td>
 
-				{% if book_moderator %}
+				{% if book_moderator or user.is_authenticated %}
 					<td>
 						<a href="{{ book.get_absolute_url}}/update">
 							<img src="/static/icons/pencil-square.svg" alt="Edit" width="25" height="32">
